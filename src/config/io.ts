@@ -556,7 +556,7 @@ export function createConfigIO(overrides: ConfigIoDeps = {}) {
       // Re-thread original variables from the template (parsed config with ${...})
       // into the final config object before writing.
       // This preserves keys like "token": "${MY_TOKEN}" instead of writing the resolved "abc".
-      configToWrite = restoreTemplateVars(configToWrite, template, deps.env) as OpenClawConfig;
+      configToWrite = coerceConfig(restoreTemplateVars(configToWrite, template, deps.env));
     }
 
     const json = JSON.stringify(configToWrite, null, 2).trimEnd().concat("\n");
